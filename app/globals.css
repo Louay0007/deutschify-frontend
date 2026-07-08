@@ -187,6 +187,17 @@
   --sidebar-accent-foreground: var(--warm-cream);
   --sidebar-border: var(--cork-border);
   --sidebar-ring: var(--ember-accent);
+
+  /* Course cards — dark surfaces, warm-cream typography */
+  --course-paper: var(--bark-brown);
+  --course-paper-ink: var(--warm-cream);
+  --course-paper-muted: color-mix(in srgb, var(--warm-cream) 62%, var(--driftwood));
+  --course-paper-border: color-mix(in srgb, var(--warm-cream) 12%, transparent);
+  --course-drop-dash: color-mix(in srgb, var(--warm-cream) 28%, var(--cork-border));
+  --course-drop-fill: color-mix(in srgb, var(--walnut-shadow) 55%, var(--bark-brown));
+  --course-correct: #4ade80;
+  --course-wrong: #f87171;
+  --course-cream-soft: color-mix(in srgb, var(--warm-cream) 8%, var(--bark-brown));
 }
 
 .dark {
@@ -349,5 +360,78 @@
   .touch-44 {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Course exercise — dark cards, white typography */
+  .course-paper {
+    background: var(--course-paper);
+    color: var(--course-paper-ink);
+    border: 1px solid var(--course-paper-border);
+  }
+
+  .course-paper-muted {
+    color: var(--course-paper-muted);
+  }
+
+  .course-card {
+    background: var(--course-paper);
+    color: var(--course-paper-ink);
+    border: 1px solid var(--course-paper-border);
+  }
+
+  .course-drop-zone {
+    border: 1.5px dashed var(--course-drop-dash);
+    background: var(--course-drop-fill);
+    color: var(--course-paper-muted);
+  }
+
+  .course-drop-zone-active {
+    border-color: var(--ember-accent);
+    background: color-mix(in srgb, var(--ember-accent) 14%, var(--bark-brown));
+    color: var(--warm-cream);
+  }
+
+  .course-chip {
+    background: color-mix(in srgb, var(--walnut-shadow) 40%, var(--bark-brown));
+    color: var(--warm-cream);
+    border: 1px solid var(--course-paper-border);
+  }
+
+  .course-topic-card {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bark-brown) 92%, var(--walnut-shadow)) 0%,
+      var(--bark-brown) 100%
+    );
+    color: var(--warm-cream);
+    border: 1px solid var(--course-paper-border);
+  }
+
+  /* Native scrollbar fallback (Firefox + WebKit) */
+  .deutschify-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--ember-accent) 55%, var(--driftwood))
+      transparent;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  .deutschify-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .deutschify-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .deutschify-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--warm-cream) 22%, transparent);
+    border-radius: var(--radius-full);
+    transition: background 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .deutschify-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--ember-accent) 75%, var(--warm-cream));
   }
 }

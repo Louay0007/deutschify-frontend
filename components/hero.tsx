@@ -57,13 +57,13 @@ export function Hero() {
 
             <div className="flex items-center gap-2">
               <Link
-                href="#pricing"
+                href="/login"
                 className="hidden rounded-full px-3 py-2 text-[15px] font-medium text-warm-cream/80 transition-colors hover:bg-warm-cream/8 hover:text-warm-cream lg:block"
               >
                 Sign In
               </Link>
               <Link
-                href="#pricing"
+                href="/register"
                 className="hidden rounded-full bg-warm-cream px-4 py-2 text-[15px] font-semibold text-walnut-shadow transition-transform active:scale-[0.97] lg:block"
               >
                 Get Started
@@ -98,7 +98,14 @@ export function Hero() {
                   </Link>
                 ))}
                 <Link
-                  href="#pricing"
+                  href="/login"
+                  className="rounded-[12px] px-4 py-3.5 text-[17px] text-warm-cream/80 transition-colors hover:bg-warm-cream/8 hover:text-warm-cream"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
                   className="mt-1 rounded-full bg-warm-cream px-4 py-3.5 text-center text-[17px] font-semibold text-walnut-shadow"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -147,11 +154,11 @@ export function Hero() {
           </p>
 
           <div className="mt-7 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:justify-center">
-            <Button size="lg" className="w-full sm:w-auto">
-              Start Learning
+            <Button size="lg" className="w-full sm:w-auto" asChild>
+              <Link href="/register">Start Learning</Link>
             </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Explore Lessons
+            <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
+              <Link href="/login">Sign In</Link>
             </Button>
           </div>
 
