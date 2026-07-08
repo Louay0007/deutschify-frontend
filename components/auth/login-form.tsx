@@ -9,6 +9,7 @@ import { fieldIcons } from "@/components/auth/auth-icons"
 import { AuthShell } from "@/components/auth/auth-shell"
 import { AuthSubmitButton } from "@/components/auth/auth-submit-button"
 import { authApi } from "@/lib/auth/api"
+import { MOCK_DEMO, isMockAuthEnabled } from "@/lib/mock/mock-auth"
 import { useAuth } from "@/lib/auth/auth-context"
 import { ApiError } from "@/lib/auth/types"
 import { isValidEmail, mapAuthErrorMessage } from "@/lib/auth/validation"
@@ -108,6 +109,18 @@ export function LoginForm() {
         {infoNotice ? (
           <AuthAlert tone="info" role="status">
             {infoNotice}
+          </AuthAlert>
+        ) : null}
+
+        {isMockAuthEnabled() ? (
+          <AuthAlert tone="info" role="status">
+            Demo mode — open{" "}
+            <Link href="/app" className="font-semibold underline">
+              /app
+            </Link>{" "}
+            directly, or sign in with{" "}
+            <span className="font-semibold">{MOCK_DEMO.email}</span> /{" "}
+            <span className="font-semibold">{MOCK_DEMO.password}</span>
           </AuthAlert>
         ) : null}
 

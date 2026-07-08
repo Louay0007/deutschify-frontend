@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react"
 import { authApi } from "./api"
-import { isAuthBypassEnabled, MOCK_USER } from "@/lib/mock/mock-user"
+import { isMockAuthEnabled, MOCK_USER } from "@/lib/mock/mock-user"
 import { markOnboardingPending, hasCompletedOnboarding } from "@/lib/onboarding/storage"
 import {
   clearSession,
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = getStoredUser()
-    const bypass = isAuthBypassEnabled()
+    const bypass = isMockAuthEnabled()
 
     if (stored) {
       setUser(stored)
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const logout = useCallback(async () => {
-    if (!isAuthBypassEnabled()) {
+    if (!isMockAuthEnabled()) {
       await authApi.logout()
       clearSession()
       setUser(null)
@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     () => ({
       user,
       isReady,
-      isAuthenticated: Boolean(user) || isAuthBypassEnabled(),
+      isAuthenticated: Boolean(user) || isMockAuthEnabled(),
       showVerifyBanner,
       setSession,
       refreshMe,

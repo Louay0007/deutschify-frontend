@@ -1,4 +1,5 @@
 import { ApiError, type ApiErrorBody, type ApiSuccess } from "./types"
+import { isMockAuthEnabled, mockAuthApi } from "@/lib/mock/mock-auth"
 import {
   clearSession,
   getAccessToken,
@@ -182,39 +183,68 @@ export async function apiRequest<T>(
 
 export const authApi = {
   login(body: { email: string; password: string }) {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.login(body).catch(() => {
+        throw new ApiError({
+          status: 401,
+          code: "INVALID_CREDENTIALS",
+          message: "Invalid email or password.",
+        })
+      })
+    }
     return apiRequest<AuthTokensPayload>("/auth/login", {
       method: "POST",
       body,
     })
   },
   register(body: { email: string; password: string; displayName: string }) {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.register(body)
+    }
     return apiRequest<AuthTokensPayload>("/auth/register", {
       method: "POST",
       body,
     })
   },
   forgotPassword(body: { email: string }) {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.forgotPassword(body)
+    }
     return apiRequest<{ message?: string }>("/auth/forgot-password", {
       method: "POST",
       body,
     })
   },
   resetPassword(body: { token: string; newPassword: string }) {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.resetPassword(body)
+    }
     return apiRequest<{ message?: string }>("/auth/reset-password", {
       method: "POST",
       body,
     })
   },
   verifyEmail(body: { token: string }) {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.verifyEmail(body)
+    }
     return apiRequest<{ message?: string }>("/auth/verify-email", {
       method: "POST",
       body,
     })
   },
   me() {
+    if (isMockAuthEnabled()) {
+      return mockAuthApi.me()
+    }
     return apiRequest<AuthUser>("/auth/me", { auth: true })
   },
   async logout() {
+    if (isMockAuthEnabled()) {
+      await mockAuthApi.logout()
+      clearSession()
+      return
+    }
     const refreshToken = getRefreshToken()
     try {
       if (refreshToken) {
@@ -232,6 +262,11 @@ export const authApi = {
     }
   },
   async logoutAll() {
+    if (isMockAuthEnabled()) {
+      await mockAuthApi.logoutAll()
+      clearSession()
+      return
+    }
     try {
       await apiRequest("/auth/logout-all", {
         method: "POST",

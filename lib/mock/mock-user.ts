@@ -21,6 +21,4 @@ export const MOCK_USER: AuthUser = {
   createdAt: new Date().toISOString(),
 }
 
-export function isAuthBypassEnabled() {
-  return process.env.NEXT_PUBLIC_AUTH_BYPASS === "true"
-}
+export { isMockAuthEnabled, isAuthBypassEnabled } from "@/lib/mock/mock-auth"
