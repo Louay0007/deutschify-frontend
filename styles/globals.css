@@ -1,0 +1,353 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* SF Pro — non-bold weights only (Ultralight → Semibold) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Ultralight.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Thin.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/sf-pro/SF-Pro-Display-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Ultralight.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Thin.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/sf-pro/SF-Pro-Text-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand color tokens */
+  --warm-cream: #ffedd7;
+  --walnut-shadow: #100904;
+  --bark-brown: #382416;
+  --cork-border: #40372e;
+  --driftwood: #6c5f51;
+  --ember-accent: #dc5000;
+  --pure-black: #000000;
+
+  /* iOS system-inspired materials (dark) */
+  --ios-separator: color-mix(in srgb, var(--warm-cream) 12%, transparent);
+  --ios-fill: transparent;
+  --ios-fill-secondary: transparent;
+  --ios-glass: transparent;
+  --ios-glass-border: color-mix(in srgb, var(--warm-cream) 14%, transparent);
+
+  /* Semantic → brand mapping (dark warm system) */
+  --background: var(--walnut-shadow);
+  --foreground: var(--warm-cream);
+  --card: var(--bark-brown);
+  --card-foreground: var(--warm-cream);
+  --popover: var(--bark-brown);
+  --popover-foreground: var(--warm-cream);
+  --primary: var(--bark-brown);
+  --primary-foreground: var(--warm-cream);
+  --secondary: var(--cork-border);
+  --secondary-foreground: var(--warm-cream);
+  --muted: var(--bark-brown);
+  --muted-foreground: var(--driftwood);
+  --accent: var(--ember-accent);
+  --accent-foreground: var(--warm-cream);
+  --destructive: var(--ember-accent);
+  --destructive-foreground: var(--warm-cream);
+  --border: var(--cork-border);
+  --input: var(--cork-border);
+  --ring: var(--ember-accent);
+  --chart-1: var(--ember-accent);
+  --chart-2: var(--driftwood);
+  --chart-3: var(--warm-cream);
+  --chart-4: var(--bark-brown);
+  --chart-5: var(--cork-border);
+
+  /* iOS concentric radius scale */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* iOS 8pt spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --sidebar: var(--walnut-shadow);
+  --sidebar-foreground: var(--warm-cream);
+  --sidebar-primary: var(--bark-brown);
+  --sidebar-primary-foreground: var(--warm-cream);
+  --sidebar-accent: var(--bark-brown);
+  --sidebar-accent-foreground: var(--warm-cream);
+  --sidebar-border: var(--cork-border);
+  --sidebar-ring: var(--ember-accent);
+}
+
+.dark {
+  --background: var(--walnut-shadow);
+  --foreground: var(--warm-cream);
+  --card: var(--bark-brown);
+  --card-foreground: var(--warm-cream);
+  --popover: var(--bark-brown);
+  --popover-foreground: var(--warm-cream);
+  --primary: var(--bark-brown);
+  --primary-foreground: var(--warm-cream);
+  --secondary: var(--cork-border);
+  --secondary-foreground: var(--warm-cream);
+  --muted: var(--bark-brown);
+  --muted-foreground: var(--driftwood);
+  --accent: var(--ember-accent);
+  --accent-foreground: var(--warm-cream);
+  --destructive: var(--ember-accent);
+  --destructive-foreground: var(--warm-cream);
+  --border: var(--cork-border);
+  --input: var(--cork-border);
+  --ring: var(--ember-accent);
+  --sidebar: var(--walnut-shadow);
+  --sidebar-foreground: var(--warm-cream);
+  --sidebar-primary: var(--bark-brown);
+  --sidebar-primary-foreground: var(--warm-cream);
+  --sidebar-accent: var(--bark-brown);
+  --sidebar-accent-foreground: var(--warm-cream);
+  --sidebar-border: var(--cork-border);
+  --sidebar-ring: var(--ember-accent);
+}
+
+@theme inline {
+  /* Self-hosted SF Pro: Text for UI/body, Display for large titles */
+  --font-sans: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-warm-cream: var(--warm-cream);
+  --color-walnut-shadow: var(--walnut-shadow);
+  --color-bark-brown: var(--bark-brown);
+  --color-cork-border: var(--cork-border);
+  --color-driftwood: var(--driftwood);
+  --color-ember-accent: var(--ember-accent);
+  --color-pure-black: var(--pure-black);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans font-normal;
+    font-feature-settings: "ss01" on, "ss02" on;
+    letter-spacing: -0.01em;
+    overflow-x: clip;
+  }
+
+  /* Display optical size for large titles; max weight Semibold (no Bold files) */
+  h1, h2, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    font-weight: 600;
+  }
+
+  h3, h4 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+
+  /* Cap bold utility at Semibold — Bold/Heavy/Black OTFs are not loaded */
+  .font-bold,
+  .font-extrabold,
+  .font-black {
+    font-weight: 600;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--ember-accent) 35%, transparent);
+    color: var(--warm-cream);
+  }
+}
+
+@layer utilities {
+  .ios-glass {
+    background: transparent;
+    border: 1px solid var(--ios-glass-border);
+  }
+
+  .ios-glass-nav {
+    background: transparent;
+    border-bottom: 1px solid var(--ios-separator);
+  }
+
+  .ios-hairline {
+    border: 1px solid var(--ios-separator);
+  }
+
+  .ios-fill {
+    background: transparent;
+  }
+
+  .ios-capsule {
+    border-radius: var(--radius-full);
+  }
+
+  .ios-spring {
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .touch-44 {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
