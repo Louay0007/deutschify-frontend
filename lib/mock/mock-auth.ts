@@ -6,7 +6,7 @@ const MOCK_REFRESH = "mock-refresh-token"
 
 /** Demo account for quick sign-in during mock mode */
 export const MOCK_DEMO = {
-  email: "amira@deutschify.app",
+  email: "basma@deutschify.app",
   password: "Deutschify1",
 } as const
 
