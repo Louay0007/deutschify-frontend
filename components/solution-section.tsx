@@ -2,21 +2,21 @@
 
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  BookOpen,
-  Headphones,
-  Mic,
-  Puzzle,
-  ChevronRight,
-} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+  journeyStepIcons,
+  landingChromeIcons,
+  LandingIcon,
+  type LandingIconComponent,
+} from "@/components/landing/landing-icons"
 
 interface JourneyStep {
   id: number
   title: string
   description: string
-  icon: React.ReactNode
+  icon: LandingIconComponent
+  detail: string
 }
 
 const steps: JourneyStep[] = [
@@ -25,28 +25,32 @@ const steps: JourneyStep[] = [
     title: "1 — Choose a Module",
     description:
       "Start with Lesen, Sprachbausteine, Hören, Schreiben, or Mündlich — the full official B2 exam map in one place.",
-    icon: <BookOpen className="h-5 w-5" />,
+    icon: journeyStepIcons.chooseModule.icon,
+    detail: journeyStepIcons.chooseModule.detail,
   },
   {
     id: 2,
     title: "2 — Practice Interactively",
     description:
       "Complete realistic exercises, audio tasks, writing prompts, and speaking topics designed like the real exam.",
-    icon: <Puzzle className="h-5 w-5" />,
+    icon: journeyStepIcons.practice.icon,
+    detail: journeyStepIcons.practice.detail,
   },
   {
     id: 3,
     title: "3 — Get Instant Feedback",
     description:
       "See corrections, explanations, vocabulary help, and grammar notes immediately — not after waiting days.",
-    icon: <Headphones className="h-5 w-5" />,
+    icon: journeyStepIcons.feedback.icon,
+    detail: journeyStepIcons.feedback.detail,
   },
   {
     id: 4,
     title: "4 — Track & Pass with Confidence",
     description:
       "Review progress, strengthen weak skills, and walk into your B2 exam ready for study, work, or life in Germany.",
-    icon: <Mic className="h-5 w-5" />,
+    icon: journeyStepIcons.trackPass.icon,
+    detail: journeyStepIcons.trackPass.detail,
   },
 ]
 
@@ -104,7 +108,7 @@ export function SolutionSection() {
                 className="space-y-4"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-[14px] bg-ember-accent text-warm-cream">
-                  {steps[activeIndex].icon}
+                  <LandingIcon icon={steps[activeIndex].icon} />
                 </div>
                 <p className="text-[13px] font-semibold tracking-[0.06em] text-ember-accent uppercase">
                   Step {activeIndex + 1} of {steps.length}
@@ -112,6 +116,9 @@ export function SolutionSection() {
                 <h3 className="font-display text-2xl font-semibold tracking-[-0.022em] text-warm-cream sm:text-3xl">
                   {steps[activeIndex].title}
                 </h3>
+                <p className="text-[12px] font-medium text-warm-cream/70">
+                  {steps[activeIndex].detail}
+                </p>
                 <p className="max-w-md text-[15px] leading-relaxed text-driftwood sm:text-[17px]">
                   {steps[activeIndex].description}
                 </p>
@@ -163,7 +170,7 @@ export function SolutionSection() {
                         : "bg-warm-cream/8 text-driftwood"
                     )}
                   >
-                    {step.icon}
+                    <LandingIcon icon={step.icon} size="xs" />
                   </div>
                   <div className="flex-1 space-y-1">
                     <h3
@@ -178,14 +185,19 @@ export function SolutionSection() {
                     </h3>
                     <AnimatePresence>
                       {activeIndex === index && (
-                        <motion.p
+                        <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden text-[15px] leading-relaxed text-driftwood"
+                          className="overflow-hidden"
                         >
-                          {step.description}
-                        </motion.p>
+                          <p className="text-[12px] font-medium text-ember-accent/90">
+                            {step.detail}
+                          </p>
+                          <p className="mt-1 text-[15px] leading-relaxed text-driftwood">
+                            {step.description}
+                          </p>
+                        </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
@@ -197,7 +209,11 @@ export function SolutionSection() {
                         : "-translate-x-2 opacity-0"
                     )}
                   >
-                    <ChevronRight className="h-5 w-5 text-warm-cream/40" />
+                    <LandingIcon
+                      icon={landingChromeIcons.chevronRight}
+                      className="text-warm-cream/40"
+                      size="xs"
+                    />
                   </div>
                 </div>
               </motion.button>
@@ -208,7 +224,7 @@ export function SolutionSection() {
         <div className="flex justify-center pt-2 sm:pt-4">
           <Button size="lg" className="w-full max-w-sm gap-2 sm:w-auto">
             Start Your Journey
-            <ChevronRight className="h-4 w-4" />
+            <LandingIcon icon={landingChromeIcons.chevronRight} size="xs" />
           </Button>
         </div>
       </div>

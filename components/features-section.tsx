@@ -2,57 +2,69 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { BookOpen, Puzzle, Headphones, PenLine, Mic, LayoutDashboard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+  b2ModuleIcons,
+  platformFeatureIcons,
+  LandingIcon,
+  type LandingIconComponent,
+} from "@/components/landing/landing-icons"
 
 interface FeatureItem {
   id: string
-  icon: React.ReactNode
+  icon: LandingIconComponent
   title: string
   description: string
+  detail: string
 }
 
 const DEFAULT_FEATURES: FeatureItem[] = [
   {
     id: "1",
-    icon: <BookOpen className="h-5 w-5 text-warm-cream" />,
+    icon: b2ModuleIcons.lesen.icon,
     title: "Lesen — Interactive Reading",
+    detail: b2ModuleIcons.lesen.detail,
     description:
       "Authentic B2 passages with interactive questions, instant correction, vocabulary explanations, and grammar notes at every difficulty level.",
   },
   {
     id: "2",
-    icon: <Puzzle className="h-5 w-5 text-warm-cream" />,
+    icon: b2ModuleIcons.sprachbausteine.icon,
     title: "Sprachbausteine — Grammar",
+    detail: b2ModuleIcons.sprachbausteine.detail,
     description:
       "Fill-in-the-blank drills, clear explanations, error correction, and smart feedback so you master structures — not just memorize them.",
   },
   {
     id: "3",
-    icon: <Headphones className="h-5 w-5 text-warm-cream" />,
+    icon: b2ModuleIcons.horen.icon,
     title: "Hören — Listening",
+    detail: b2ModuleIcons.horen.detail,
     description:
       "Native-level recordings, interactive questions, transcripts, automatic scoring, and a progress history built for real exam listening.",
   },
   {
     id: "4",
-    icon: <PenLine className="h-5 w-5 text-warm-cream" />,
+    icon: b2ModuleIcons.schreiben.icon,
     title: "Schreiben — Writing",
+    detail: b2ModuleIcons.schreiben.detail,
     description:
       "Exam prompts, model answers, structures, useful vocabulary, grammar reminders, and common-mistake checklists. AI correction coming soon.",
   },
   {
     id: "5",
-    icon: <Mic className="h-5 w-5 text-warm-cream" />,
+    icon: b2ModuleIcons.mundlich.icon,
     title: "Mündlich — Speaking",
+    detail: b2ModuleIcons.mundlich.detail,
     description:
       "Official speaking topics with problem, solution, Redemittel, discussion ideas, and opinion examples — plus future AI speaking evaluation.",
   },
   {
     id: "6",
-    icon: <LayoutDashboard className="h-5 w-5 text-warm-cream" />,
+    icon: platformFeatureIcons.dashboard.icon,
     title: "Progress Dashboard",
+    detail: platformFeatureIcons.dashboard.detail,
     description:
       "Track lessons completed, exam readiness, weekly activity, vocabulary learned, average score, and the skills that need more focus.",
   },
@@ -71,7 +83,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
 }
 
@@ -134,13 +146,16 @@ export function FeaturesSection({
               variants={itemVariants}
               className="ios-fill ios-hairline group flex flex-col rounded-[20px] p-5 transition-transform duration-300 ios-spring hover:-translate-y-0.5 sm:p-6"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[14px] bg-ember-accent">
-                {feature.icon}
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-[14px] bg-ember-accent">
+                <LandingIcon icon={feature.icon} className="text-warm-cream" />
               </div>
               <div className="flex flex-col gap-2">
                 <h4 className="text-[17px] font-semibold tracking-[-0.02em] text-warm-cream">
                   {feature.title}
                 </h4>
+                <p className="text-[12px] font-medium text-ember-accent/90">
+                  {feature.detail}
+                </p>
                 <p className="text-balance text-[15px] leading-relaxed text-driftwood">
                   {feature.description}
                 </p>

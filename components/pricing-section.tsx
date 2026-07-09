@@ -2,8 +2,17 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import {
+  LandingIcon,
+  pricingFeatureIcons,
+  type LandingIconComponent,
+} from "@/components/landing/landing-icons"
+
+interface PricingFeature {
+  text: string
+  icon: LandingIconComponent
+}
 
 interface PricingPlan {
   id: string
@@ -11,7 +20,7 @@ interface PricingPlan {
   priceMonthly: number | string
   priceYearly: number | string
   description: string
-  features: string[]
+  features: PricingFeature[]
   cta: string
   popular?: boolean
   type: "subscription" | "custom"
@@ -25,10 +34,10 @@ const plans: PricingPlan[] = [
     priceYearly: 0,
     description: "Begin for free and explore how interactive B2 practice feels.",
     features: [
-      "Access to sample Lesen lessons",
-      "Basic grammar drills",
-      "Progress snapshot",
-      "Community tips",
+      { text: "Access to sample Lesen lessons", icon: pricingFeatureIcons.sampleLessons },
+      { text: "Basic grammar drills", icon: pricingFeatureIcons.grammarDrills },
+      { text: "Progress snapshot", icon: pricingFeatureIcons.progressSnapshot },
+      { text: "Community tips", icon: pricingFeatureIcons.community },
     ],
     cta: "Begin for Free",
     type: "subscription",
@@ -41,11 +50,11 @@ const plans: PricingPlan[] = [
     description:
       "Full exam preparation across reading, grammar, listening, writing, and speaking.",
     features: [
-      "All five B2 modules",
-      "Instant corrections & explanations",
-      "Speaking topics with Redemittel",
-      "Writing structures & model answers",
-      "Exam-readiness dashboard",
+      { text: "All five B2 modules", icon: pricingFeatureIcons.allModules },
+      { text: "Instant corrections & explanations", icon: pricingFeatureIcons.corrections },
+      { text: "Speaking topics with Redemittel", icon: pricingFeatureIcons.speaking },
+      { text: "Writing structures & model answers", icon: pricingFeatureIcons.writing },
+      { text: "Exam-readiness dashboard", icon: pricingFeatureIcons.dashboard },
     ],
     cta: "Start Learning",
     popular: true,
@@ -59,11 +68,11 @@ const plans: PricingPlan[] = [
     description:
       "For schools, cohorts, and intensive pathways from Tunisia to Germany.",
     features: [
-      "Teacher / cohort dashboard",
-      "Personalized learning paths",
-      "Mock exams & timed sessions",
-      "Priority support",
-      "Roadmap features early access",
+      { text: "Teacher / cohort dashboard", icon: pricingFeatureIcons.cohort },
+      { text: "Personalized learning paths", icon: pricingFeatureIcons.learningPaths },
+      { text: "Mock exams & timed sessions", icon: pricingFeatureIcons.mockExams },
+      { text: "Priority support", icon: pricingFeatureIcons.support },
+      { text: "Roadmap features early access", icon: pricingFeatureIcons.roadmap },
     ],
     cta: "Contact Us",
     type: "custom",
@@ -196,10 +205,16 @@ export function PricingSection() {
                 <div className="h-px w-full bg-warm-cream/10" />
 
                 <ul className="flex flex-col gap-3">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 sm:items-center">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-ember-accent sm:mt-0" />
-                      <span className="text-[15px] text-driftwood">{feature}</span>
+                  {plan.features.map((feature) => (
+                    <li key={feature.text} className="flex items-start gap-2.5 sm:items-center">
+                      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-[8px] bg-ember-accent/12 sm:mt-0">
+                        <LandingIcon
+                          icon={feature.icon}
+                          size="xs"
+                          className="text-ember-accent"
+                        />
+                      </span>
+                      <span className="text-[15px] text-driftwood">{feature.text}</span>
                     </li>
                   ))}
                 </ul>

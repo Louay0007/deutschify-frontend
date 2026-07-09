@@ -2,14 +2,13 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Headphones, Mic, PenLine, Puzzle } from "lucide-react"
+import { b2ModuleList, LandingIcon } from "@/components/landing/landing-icons"
 
-const pillars = [
-  { icon: BookOpen, label: "Lesen" },
-  { icon: Puzzle, label: "Sprachbausteine" },
-  { icon: Headphones, label: "Hören" },
-  { icon: PenLine, label: "Schreiben" },
-  { icon: Mic, label: "Mündlich" },
+const navLinks = [
+  { href: "#modules", label: "Modules" },
+  { href: "#journey", label: "Journey" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
 ]
 
 export function ProblemSection() {
@@ -69,15 +68,20 @@ export function ProblemSection() {
             writing, and speaking — with realistic exercises, instant feedback, and clear progress.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-2 pt-1 lg:justify-start">
-            {pillars.map(({ icon: Icon, label }) => (
-              <span
+          <div className="grid w-full max-w-xl grid-cols-1 gap-2 pt-1 sm:grid-cols-2">
+            {b2ModuleList.map(({ icon, label, detail }) => (
+              <div
                 key={label}
-                className="ios-fill ios-hairline inline-flex items-center gap-2 rounded-full px-3 py-2 text-[12px] font-semibold text-warm-cream/85 sm:px-3.5 sm:text-[13px]"
+                className="ios-fill ios-hairline flex items-start gap-3 rounded-[14px] px-3.5 py-3 text-left"
               >
-                <Icon className="h-3.5 w-3.5 text-ember-accent" />
-                {label}
-              </span>
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-ember-accent/15">
+                  <LandingIcon icon={icon} size="xs" className="text-ember-accent" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[13px] font-semibold text-warm-cream">{label}</p>
+                  <p className="mt-0.5 text-[11px] leading-snug text-driftwood">{detail}</p>
+                </div>
+              </div>
             ))}
           </div>
 

@@ -1,10 +1,11 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Menu, X, Plane } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { motion } from "framer-motion"
+import { Plane } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { landingChromeIcons, LandingIcon } from "@/components/landing/landing-icons"
 
 const navLinks = [
   { href: "#modules", label: "Modules" },
@@ -76,9 +77,9 @@ export function Hero() {
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <X className="h-5 w-5" />
+                  <LandingIcon icon={landingChromeIcons.close} className="text-warm-cream" />
                 ) : (
-                  <Menu className="h-5 w-5" />
+                  <LandingIcon icon={landingChromeIcons.menu} className="text-warm-cream" />
                 )}
               </button>
             </div>

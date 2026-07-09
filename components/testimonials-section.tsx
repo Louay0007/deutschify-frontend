@@ -1,8 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
+import {
+  landingChromeIcons,
+  LandingIcon,
+} from "@/components/landing/landing-icons"
 
 const testimonials = [
   {
@@ -108,14 +111,14 @@ export function TestimonialsSection() {
                 className="ios-fill ios-hairline flex size-11 items-center justify-center rounded-full text-warm-cream transition-colors hover:bg-warm-cream/10"
                 aria-label="Previous testimonial"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <LandingIcon icon={landingChromeIcons.chevronLeft} />
               </button>
               <button
                 onClick={nextTestimonial}
                 className="ios-fill ios-hairline flex size-11 items-center justify-center rounded-full text-warm-cream transition-colors hover:bg-warm-cream/10"
                 aria-label="Next testimonial"
               >
-                <ChevronRight className="h-5 w-5" />
+                <LandingIcon icon={landingChromeIcons.chevronRight} />
               </button>
             </div>
           </div>

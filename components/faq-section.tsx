@@ -1,42 +1,53 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import {
+  faqTopicIcons,
+  landingChromeIcons,
+  LandingIcon,
+  type LandingIconComponent,
+} from "@/components/landing/landing-icons"
 
 interface FAQItem {
   id: string
   question: string
   answer: string
+  icon: LandingIconComponent
 }
 
 const faqs: FAQItem[] = [
   {
     id: "1",
+    icon: faqTopicIcons.audience,
     question: "Who is Deutschify for?",
     answer:
       "Primarily Tunisian students preparing for the German B2 exam — plus university students, professionals seeking certification, and anyone planning to study, work, or live in Germany.",
   },
   {
     id: "2",
+    icon: faqTopicIcons.modules,
     question: "Which B2 modules are included?",
     answer:
       "All five official sections: Lesen (reading), Sprachbausteine (grammar), Hören (listening), Schreiben (writing), and Mündlich (speaking) — with structured lessons and exam-oriented practice.",
   },
   {
     id: "3",
+    icon: faqTopicIcons.interactive,
     question: "How is this different from PDFs or traditional courses?",
     answer:
       "Instead of memorizing static material, you practice interactively, receive instant corrections and explanations, review vocabulary and grammar, and track progress toward real exam readiness.",
   },
   {
     id: "4",
+    icon: faqTopicIcons.ai,
     question: "Do you offer AI writing and speaking correction?",
     answer:
       "Writing structures, model answers, and speaking Redemittel are available now. AI writing correction and AI speaking evaluation are on the roadmap as future features.",
   },
   {
     id: "5",
+    icon: faqTopicIcons.progress,
     question: "Can I track my progress?",
     answer:
       "Yes. The dashboard shows lessons completed, exam readiness, weekly activity, vocabulary learned, average score, time studied, strongest skills, and areas that need improvement.",
@@ -92,15 +103,24 @@ export function FaqSection() {
                   onClick={() => toggleQuestion(faq.id)}
                   className="group flex w-full items-start justify-between gap-3 px-4 py-4 text-left sm:items-center sm:gap-4 sm:px-5 sm:py-5"
                 >
-                  <span className="min-w-0 flex-1 text-[15px] font-semibold tracking-[-0.02em] text-warm-cream transition-colors group-hover:text-ember-accent sm:text-[17px]">
-                    {faq.question}
+                  <span className="flex min-w-0 flex-1 items-start gap-3 sm:items-center">
+                    <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-ember-accent/12 sm:mt-0">
+                      <LandingIcon icon={faq.icon} size="xs" className="text-ember-accent" />
+                    </span>
+                    <span className="min-w-0 text-[15px] font-semibold tracking-[-0.02em] text-warm-cream transition-colors group-hover:text-ember-accent sm:text-[17px]">
+                      {faq.question}
+                    </span>
                   </span>
                   <motion.div
                     animate={{ rotate: openId === faq.id ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                     className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-warm-cream/8 sm:mt-0 sm:size-8"
                   >
-                    <ChevronDown className="h-4 w-4 text-driftwood" />
+                    <LandingIcon
+                      icon={landingChromeIcons.chevronDown}
+                      size="xs"
+                      className="text-driftwood"
+                    />
                   </motion.div>
                 </button>
 
@@ -113,7 +133,7 @@ export function FaqSection() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="px-4 pb-4 pr-12 sm:px-5 sm:pb-5 sm:pr-14">
+                      <div className="px-4 pb-4 pl-[3.25rem] pr-12 sm:px-5 sm:pb-5 sm:pl-[3.75rem] sm:pr-14">
                         <p className="text-[14px] leading-relaxed text-driftwood sm:text-[15px]">
                           {faq.answer}
                         </p>
